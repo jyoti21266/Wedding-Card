@@ -2,5 +2,7 @@
   "name": "Invitely - 3D Digital Wedding Invitation & RSVP Experience",
   "description": "Interactive luxury 3D wedding invitation experience inspired by the viral Invitely Pinterest showcase. Features 3D opening doors, wax seal interaction, schedule timeline, menu, and real-time RSVP.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
