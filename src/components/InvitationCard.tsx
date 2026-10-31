@@ -234,17 +234,6 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                 {invitation.invitationNote[language]}
               </p>
 
-              {/* Family Section */}
-              <div className="pt-2">
-                <span className="text-[10px] uppercase font-sans tracking-[0.2em] opacity-60 block mb-2">
-                  {language === 'hi' ? 'आत्मीय परिवार' : 'OUR FAMILIES'}
-                </span>
-                <div className="flex items-center justify-center gap-4 text-xs sm:text-sm font-serif">
-                  <span className="font-medium">{invitation.brideFamily[language]}</span>
-                  <span className="opacity-40">|</span>
-                  <span className="font-medium">{invitation.groomFamily[language]}</span>
-                </div>
-              </div>
             </motion.div>
           )}
 

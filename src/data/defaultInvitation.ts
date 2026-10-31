@@ -76,12 +76,12 @@ export const THEMES: Record<string, ThemeConfig> = {
 };
 
 export const DEFAULT_INVITATION: InvitationData = {
-  brideName: 'Melisa',
-  groomName: 'Kerem',
+  brideName: 'Jyoti',
+  groomName: 'Ankit',
   eventType: 'wedding',
   tagline: {
-    en: 'Your fiancé cannot say "No" to this... ✨',
-    hi: 'आपका हमसफ़र इसके लिए "ना" नहीं कह सकता... ✨'
+    en: '',
+    hi: ''
   },
   invitationNote: {
     en: 'we would be honored to have you with us to witness this moment',
