@@ -38,9 +38,9 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
       }`}
       style={{ backgroundColor: theme.cardBg }}
     >
-      {/* Revealed Normal Scrolling Content */}
+      {/* Revealed Swipeable Cards Content */}
       <div 
-        className={`w-full min-h-screen transition-opacity duration-700 ${
+        className={`w-full min-h-screen flex items-center justify-center p-3 sm:p-6 transition-opacity duration-700 ${
           isOpen ? 'opacity-100 z-10 relative' : 'opacity-0 pointer-events-none absolute inset-0'
         }`}
       >

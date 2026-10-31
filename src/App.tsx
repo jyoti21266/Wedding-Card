@@ -187,8 +187,8 @@ export default function App() {
             </div>
           </header>
 
-          {/* MAIN SCROLLABLE INVITATION CONTENT */}
-          <main className="flex-1 max-w-2xl w-full mx-auto flex flex-col">
+          {/* MAIN SWIPEABLE INVITATION CONTAINER */}
+          <main className="flex-1 w-full flex flex-col justify-between">
             <InvitationCard
               invitation={invitation}
               language={language}
