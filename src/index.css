@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Garamond', 'Noto Serif Devanagari', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-script: 'Alex Brush', cursive;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* 3D Gate & Door Opening effects */
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.door-left-hinge {
+  transform-origin: left center;
+}
+
+.door-right-hinge {
+  transform-origin: right center;
+}
+
+/* Luxury parchment and embossed shadows */
+.parchment-texture {
+  background-color: #faf7f2;
+  background-image: radial-gradient(#e7ded3 0.75px, transparent 0.75px), radial-gradient(#e7ded3 0.75px, #faf7f2 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.embossed-relief {
+  box-shadow: 
+    inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+    inset -1px -1px 3px rgba(160, 140, 130, 0.25),
+    0 4px 12px rgba(130, 110, 100, 0.12);
+}
+
+.cameo-frame {
+  box-shadow:
+    0 0 0 1px #d6c6b8,
+    0 0 0 3px #faf7f2,
+    0 0 0 4px #c8b7a6,
+    0 8px 20px -4px rgba(120, 95, 80, 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(180, 160, 150, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 140, 130, 0.7);
+}
