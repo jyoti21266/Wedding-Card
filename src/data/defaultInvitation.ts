@@ -95,69 +95,74 @@ export const DEFAULT_INVITATION: InvitationData = {
     en: 'Demir FAMILY',
     hi: 'डेमिर परिवार (वर पक्ष)'
   },
-  date: '2026-08-08',
+  date: '2026-12-04',
   time: '19:00',
   dayOfWeek: {
-    en: 'SATURDAY',
-    hi: 'शनिवार'
+    en: 'FRIDAY',
+    hi: 'शुक्रवार'
   },
   monthName: {
-    en: 'AUGUST',
-    hi: 'अगस्त'
+    en: 'DECEMBER',
+    hi: 'दिसंबर'
   },
-  venueName: 'Çırağan Palace Kempinski',
-  venueAddress: 'Çırağan Caddesi No: 32, Beşiktaş',
-  city: 'Istanbul',
-  mapCoordinates: { lat: 41.0436, lng: 29.0177 },
+  venueName: 'Shree Farms & Resort',
+  venueAddress: 'Ram Jatan Colony, S.N. Singh Lane, near Sudha Milk Parlour',
+  city: 'Patna, Bihar 800014',
+  venueMapUrl: 'https://share.google/xkzQAxwm8RNDp9yi5',
+  mapCoordinates: { lat: 25.5941, lng: 85.1376 },
   themeId: 'blush_lace',
   musicEnabled: true,
   timeline: [
     {
       id: '1',
-      time: '19:00',
+      dateLabel: { en: '2 Dec 2026', hi: '2 दिसंबर 2026' },
+      time: '16:00',
       title: { 
-        en: 'Ceremony (Nikah)', 
-        hi: 'शुभ विवाह संस्कार (निकाह)' 
+        en: 'Mehndi', 
+        hi: 'मेहंदी' 
       },
       description: { 
-        en: 'Vow exchange ceremony on the Bosphorus terrace', 
-        hi: 'सुरम्य प्रांगण में पावन फेरे एवं विवाह संस्कार' 
+        en: "A festive gathering where intricate henna designs are applied to the bride's hands and feet.", 
+        hi: "एक उत्सवपूर्ण समारोह जहाँ वधू के हाथों और पैरों पर सुंदर मेहंदी लगाई जाती है।" 
       }
     },
     {
       id: '2',
-      time: '20:00',
+      dateLabel: { en: '3 Dec 2026', hi: '3 दिसंबर 2026' },
+      time: '10:30',
       title: { 
-        en: 'Cocktail Hour', 
-        hi: 'स्वागत समारोह एवं कॉकटेल' 
+        en: 'Haldi', 
+        hi: 'हल्दी' 
       },
       description: { 
-        en: 'Welcome reception accompanied by live acoustic jazz', 
-        hi: 'मधुर संगीत एवं स्वागत पेय के साथ आत्मीय स्वागत' 
+        en: "A joyful morning ritual where a turmeric paste is applied to the bride and groom for a glowing blessing.", 
+        hi: "एक आनंदमय सुबह की रस्म जहाँ वधू और वर को हल्दी का लेप लगाया जाता है।" 
       }
     },
     {
       id: '3',
-      time: '21:00',
+      dateLabel: { en: '3 Dec 2026', hi: '3 दिसंबर 2026' },
+      time: '18:30',
       title: { 
-        en: 'Banquet & Celebration', 
-        hi: 'शाही प्रीतिभोज एवं संगीत' 
+        en: 'Sangeet', 
+        hi: 'संगीत' 
       },
       description: { 
-        en: 'Grand banquet dinner, wedding cake & dancing', 
-        hi: 'भव्य रात्रिभोज, केक कटिंग एवं संगीतमय उत्सव' 
+        en: "A high-energy night of music, food, and choreographed family dance-offs.", 
+        hi: "संगीत, भोजन और पारिवारिक नृत्य प्रदर्शन की एक ऊर्जावान रात।" 
       }
     },
     {
       id: '4',
-      time: '23:30',
+      dateLabel: { en: '4 Dec 2026', hi: '4 दिसंबर 2026' },
+      time: '19:00',
       title: { 
-        en: 'After Party', 
-        hi: 'आफ्टर पार्टी एवं उल्लास' 
+        en: 'Shaadi', 
+        hi: 'शादी' 
       },
       description: { 
-        en: 'Celebration continues under the stars', 
-        hi: 'सितारों की छांव में देर रात तक आनंद एवं मस्ती' 
+        en: "is the main wedding day ceremony where the couple is united in holy matrimony through sacred vows taken around a holy fire", 
+        hi: "यह मुख्य विवाह समारोह है जहाँ पवित्र अग्नि के फेरे लेकर युगल परिणय सूत्र में बंधते हैं।" 
       }
     }
   ],

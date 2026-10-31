@@ -34,6 +34,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 }) => {
   const theme = THEMES[invitation.themeId] || THEMES.blush_lace;
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [isDateScratched, setIsDateScratched] = useState<boolean>(false);
   
   // RSVP Form state
   const [fullName, setFullName] = useState('');
@@ -78,7 +79,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
     return () => clearInterval(interval);
   }, [invitation.date, invitation.time]);
 
-  const totalPages = 7; // Couple, Date, Timeline, Menu, RSVP, Venue, Wishes
+  const totalPages = 4; // Couple, Date, Timeline, Venue
 
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -184,9 +185,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           <ChevronUp className="w-4 h-4" />
         </button>
 
-        <span className="font-serif italic text-xs tracking-widest uppercase opacity-60">
-          Invitely
-        </span>
+        <div />
 
         <button
           onClick={onOpenShareModal}
@@ -251,38 +250,79 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                 {language === 'hi' ? 'शुभ तिथि एवं समय' : 'DATE & TIME'}
               </span>
 
-              {/* Main Embossed Cameo Badge */}
-              <div
-                className="w-44 sm:w-48 py-5 px-4 rounded-[40px] flex flex-col items-center justify-center shadow-lg border relative transition-transform hover:scale-102"
-                style={{
-                  backgroundColor: theme.badgeBg,
-                  borderColor: theme.doorBorder,
-                  boxShadow: `
-                    0 8px 24px -4px rgba(130, 100, 90, 0.15),
-                    inset 0 1px 2px rgba(255, 255, 255, 0.9),
-                    inset 0 -2px 4px rgba(0, 0, 0, 0.04)
-                  `
-                }}
-              >
-                {/* Cartouche Inner Filigree border */}
+              {/* Scratch Card Date Container */}
+              <div className="relative w-44 sm:w-48 mx-auto">
                 <div
-                  className="absolute inset-2 rounded-[34px] border pointer-events-none opacity-40"
-                  style={{ borderColor: theme.fontAccent }}
-                />
+                  className="w-full py-5 px-4 rounded-[40px] flex flex-col items-center justify-center shadow-lg border relative transition-transform"
+                  style={{
+                    backgroundColor: theme.badgeBg,
+                    borderColor: theme.doorBorder,
+                    boxShadow: `
+                      0 8px 24px -4px rgba(130, 100, 90, 0.15),
+                      inset 0 1px 2px rgba(255, 255, 255, 0.9),
+                      inset 0 -2px 4px rgba(0, 0, 0, 0.04)
+                    `
+                  }}
+                >
+                  {/* Cartouche Inner Filigree border */}
+                  <div
+                    className="absolute inset-2 rounded-[34px] border pointer-events-none opacity-40"
+                    style={{ borderColor: theme.fontAccent }}
+                  />
 
-                <span className="font-serif text-5xl sm:text-6xl font-light text-stone-900 leading-none">
-                  {invitation.date.split('-')[2] || '08'}
-                </span>
+                  <span className="font-serif text-5xl sm:text-6xl font-light text-stone-900 leading-none">
+                    {invitation.date.split('-')[2] || '08'}
+                  </span>
 
-                <span className="font-serif uppercase tracking-[0.2em] text-xs sm:text-sm font-medium mt-1">
-                  {invitation.monthName[language]}
-                </span>
+                  <span className="font-serif uppercase tracking-[0.2em] text-xs sm:text-sm font-medium mt-1">
+                    {invitation.monthName[language]}
+                  </span>
 
-                <span className="text-[10px] opacity-40 my-1">✦</span>
+                  <span className="text-[10px] opacity-40 my-1">✦</span>
 
-                <span className="font-serif tracking-widest text-xs opacity-75">
-                  {invitation.date.split('-')[0] || '2026'}
-                </span>
+                  <span className="font-serif tracking-widest text-xs opacity-75">
+                    {invitation.date.split('-')[0] || '2026'}
+                  </span>
+                </div>
+
+                {/* Scratch-Off Metallic Foil Overlay */}
+                <AnimatePresence>
+                  {!isDateScratched && (
+                    <motion.div
+                      initial={{ opacity: 1 }}
+                      exit={{ opacity: 0, scale: 1.05, filter: 'blur(8px)' }}
+                      transition={{ duration: 0.5 }}
+                      onClick={() => {
+                        setIsDateScratched(true);
+                        try {
+                          confetti({
+                            particleCount: 50,
+                            spread: 60,
+                            origin: { y: 0.5 },
+                            colors: ['#c5a059', '#e2e8f0', '#f43f5e']
+                          });
+                        } catch {}
+                      }}
+                      className="absolute inset-0 rounded-[40px] cursor-pointer flex flex-col items-center justify-center p-3 text-center z-20 overflow-hidden shadow-xl border-2 border-amber-200/60"
+                      style={{
+                        background: 'linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%)',
+                        boxShadow: '0 10px 25px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.6)'
+                      }}
+                    >
+                      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[size:12px_12px] pointer-events-none" />
+                      
+                      <div className="relative z-10 bg-white/95 backdrop-blur-xs px-3 py-2 rounded-2xl shadow-md border border-stone-200 flex flex-col items-center gap-0.5 transition-transform hover:scale-105">
+                        <span className="text-lg">🪙✨</span>
+                        <span className="font-serif font-semibold text-xs text-stone-900 tracking-wide">
+                          {language === 'hi' ? 'तिथि के लिए स्क्रैच करें' : 'Scratch to Reveal'}
+                        </span>
+                        <span className="text-[9px] text-stone-500 font-sans">
+                          {language === 'hi' ? '(क्लिक करें)' : '(Tap here)'}
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Two pill badges below: Day of Week & Hour */}
@@ -368,6 +408,11 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                 {invitation.timeline.map((item, idx) => (
                   <React.Fragment key={item.id}>
                     <div className="flex flex-col items-center text-center">
+                      {item.dateLabel && (
+                        <span className="font-sans text-[10px] uppercase font-semibold text-rose-800 tracking-wider mb-0.5">
+                          {item.dateLabel[language]}
+                        </span>
+                      )}
                       <span className="font-mono text-xs opacity-60 tracking-wider">
                         {item.time}
                       </span>
@@ -392,237 +437,8 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             </motion.div>
           )}
 
-          {/* PAGE 3: MENÜ / DINNER */}
+          {/* PAGE 3: VENUE & MAP DIRECTIONS */}
           {currentPage === 3 && (
-            <motion.div
-              key="page-menu"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col items-center justify-center space-y-4 my-auto px-2"
-            >
-              {/* Cameo Cartouche Header */}
-              <div
-                className="py-1.5 px-6 rounded-full border shadow-xs inline-flex items-center gap-2"
-                style={{ backgroundColor: theme.badgeBg, borderColor: theme.doorBorder }}
-              >
-                <span className="text-xs">✦</span>
-                <h2 className="font-serif text-base tracking-wide font-medium">
-                  {language === 'hi' ? 'शाही मेन्यू' : 'Gourmet Menu'}
-                </h2>
-                <span className="text-xs">✦</span>
-              </div>
-
-              {/* Menu Courses */}
-              <div className="space-y-3 w-full max-w-xs">
-                {invitation.menu.map((item, idx) => (
-                  <React.Fragment key={item.id}>
-                    <div className="flex flex-col items-center text-center">
-                      <span className="font-sans text-[10px] tracking-[0.2em] uppercase opacity-65 font-medium">
-                        {item.course[language]}
-                      </span>
-                      <h3 className="font-serif text-base sm:text-lg font-medium text-stone-900 mt-0.5">
-                        {item.title[language]}
-                      </h3>
-                      <p className="font-serif italic text-xs opacity-75 max-w-[250px] mt-0.5 leading-snug">
-                        {item.description[language]}
-                      </p>
-                    </div>
-
-                    {idx < invitation.menu.length - 1 && (
-                      <div className="flex justify-center opacity-40">
-                        <span className="text-[10px]">✦</span>
-                      </div>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* PAGE 4: RSVP / KATILIM FORM */}
-          {currentPage === 4 && (
-            <motion.div
-              key="page-rsvp"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col items-center justify-center space-y-3 my-auto w-full max-w-xs mx-auto"
-            >
-              {/* Cameo Cartouche Header */}
-              <div
-                className="py-1 px-5 rounded-full border shadow-xs inline-flex items-center gap-1.5"
-                style={{ backgroundColor: theme.badgeBg, borderColor: theme.doorBorder }}
-              >
-                <span className="text-[10px]">✦</span>
-                <h2 className="font-serif text-sm tracking-widest font-semibold uppercase">
-                  RSVP
-                </h2>
-                <span className="text-[10px]">✦</span>
-              </div>
-
-              <div className="space-y-0.5">
-                <h3 className="font-serif text-base uppercase tracking-wider font-medium text-stone-800">
-                  {language === 'hi' ? 'आपकी उपस्थिति' : 'YOUR ATTENDANCE'}
-                </h3>
-                <p className="font-serif italic text-xs opacity-75">
-                  {language === 'hi'
-                    ? 'कृपया अपनी उपस्थिति की सूचना हमें अवश्य दें।'
-                    : 'Kindly let us know if you will be celebrating with us.'}
-                </p>
-              </div>
-
-              {isSubmitted ? (
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="p-5 rounded-2xl bg-white/90 border border-stone-200 shadow-sm text-center space-y-2 w-full"
-                >
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
-                    <Check className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-serif text-lg font-medium text-stone-900">
-                    {language === 'hi' ? 'आपकी प्रतिक्रिया प्राप्त हुई!' : 'RSVP Received!'}
-                  </h4>
-                  <p className="text-xs opacity-75 leading-relaxed">
-                    {status === 'attending'
-                      ? (language === 'hi'
-                          ? `धन्यवाद ${fullName}, आपके स्वागत के लिए हम अत्यंत उत्सुक हैं!`
-                          : `Thank you ${fullName}, we cannot wait to celebrate with you!`)
-                      : (language === 'hi'
-                          ? `सूचना देने के लिए धन्यवाद, ${fullName}।`
-                          : `Thank you for letting us know, ${fullName}.`)}
-                  </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="text-xs font-sans text-stone-600 underline hover:text-stone-900 pt-2 block mx-auto"
-                  >
-                    {language === 'hi' ? 'प्रतिक्रिया संपादित करें' : 'Edit Response'}
-                  </button>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleRsvpSubmit} className="w-full space-y-2.5 text-left">
-                  {/* FULL NAME Field */}
-                  <div>
-                    <label className="block text-[10px] uppercase font-sans tracking-widest opacity-70 mb-1 text-center">
-                      {language === 'hi' ? 'पूरा नाम' : 'FULL NAME'}
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      placeholder={language === 'hi' ? 'अपना नाम दर्ज करें...' : 'Enter your name...'}
-                      className="w-full px-3 py-1.5 rounded-xl border bg-white/80 text-stone-800 text-xs font-sans focus:outline-none focus:ring-1 focus:ring-stone-400 placeholder:italic placeholder:text-stone-400 text-center"
-                      style={{ borderColor: theme.doorBorder }}
-                    />
-                  </div>
-
-                  {/* Radio Choice: Attending / Declined */}
-                  <div className="space-y-1.5 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setStatus('attending')}
-                      className={`w-full py-2 px-3 rounded-xl border text-xs font-serif flex items-center justify-center gap-2 transition-all ${
-                        status === 'attending'
-                          ? 'bg-white shadow-xs font-semibold'
-                          : 'bg-white/40 opacity-70 hover:opacity-100'
-                      }`}
-                      style={{
-                        borderColor: status === 'attending' ? theme.primary : theme.doorBorder
-                      }}
-                    >
-                      <div
-                        className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                          status === 'attending' ? 'border-rose-800' : 'border-stone-400'
-                        }`}
-                      >
-                        {status === 'attending' && (
-                          <div className="w-2 h-2 rounded-full bg-rose-800" />
-                        )}
-                      </div>
-                      <span>{language === 'hi' ? 'अवश्य उपस्थित रहूँगा/रहूँगी' : 'I will attend'}</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setStatus('declined')}
-                      className={`w-full py-2 px-3 rounded-xl border text-xs font-serif flex items-center justify-center gap-2 transition-all ${
-                        status === 'declined'
-                          ? 'bg-white shadow-xs font-semibold'
-                          : 'bg-white/40 opacity-70 hover:opacity-100'
-                      }`}
-                      style={{
-                        borderColor: status === 'declined' ? theme.primary : theme.doorBorder
-                      }}
-                    >
-                      <div
-                        className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                          status === 'declined' ? 'border-rose-800' : 'border-stone-400'
-                        }`}
-                      >
-                        {status === 'declined' && (
-                          <div className="w-2 h-2 rounded-full bg-rose-800" />
-                        )}
-                      </div>
-                      <span>{language === 'hi' ? 'दुर्भाग्यवश उपस्थित नहीं हो पाऊँगा/पाऊँगी' : 'Unfortunately I cannot attend'}</span>
-                    </button>
-                  </div>
-
-                  {/* Guest count stepper (if attending) */}
-                  {status === 'attending' && (
-                    <div className="pt-1">
-                      <label className="block text-[10px] uppercase font-sans tracking-widest opacity-70 mb-1 text-center">
-                        {language === 'hi' ? 'अतिथियों की संख्या' : 'NUMBER OF GUESTS'}
-                      </label>
-                      <div className="flex items-center justify-center gap-4">
-                        <button
-                          type="button"
-                          onClick={() => setGuestCount((c) => Math.max(1, c - 1))}
-                          className="w-7 h-7 rounded-full border bg-white/80 hover:bg-white text-stone-700 flex items-center justify-center text-sm font-medium shadow-xs"
-                          style={{ borderColor: theme.doorBorder }}
-                        >
-                          -
-                        </button>
-                        <span className="font-mono text-base font-semibold w-6 text-center">
-                          {guestCount}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setGuestCount((c) => Math.min(6, c + 1))}
-                          className="w-7 h-7 rounded-full border bg-white/80 hover:bg-white text-stone-700 flex items-center justify-center text-sm font-medium shadow-xs"
-                          style={{ borderColor: theme.doorBorder }}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Submit Button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="w-full py-2.5 px-4 rounded-xl font-serif text-sm tracking-wider uppercase flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-[0.98]"
-                      style={{
-                        backgroundColor: theme.badgeBg,
-                        color: theme.textColor,
-                        border: `1px solid ${theme.doorBorder}`
-                      }}
-                    >
-                      <span>{language === 'hi' ? 'स्वीकृति भेजें' : 'SUBMIT RSVP'}</span>
-                      <span>→</span>
-                    </button>
-                  </div>
-                </form>
-              )}
-            </motion.div>
-          )}
-
-          {/* PAGE 5: VENUE & MAP DIRECTIONS */}
-          {currentPage === 5 && (
             <motion.div
               key="page-venue"
               initial={{ opacity: 0, y: 15 }}
@@ -670,9 +486,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
               <div className="flex flex-col gap-2 w-full max-w-xs">
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                    `${invitation.venueName} ${invitation.venueAddress}`
-                  )}`}
+                  href={invitation.venueMapUrl || 'https://share.google/xkzQAxwm8RNDp9yi5'}
                   target="_blank"
                   rel="noreferrer"
                   className="py-2 px-3 rounded-xl border bg-white/90 hover:bg-white text-xs font-sans font-medium text-stone-800 flex items-center justify-center gap-2 shadow-xs transition-colors"
@@ -682,95 +496,10 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                   <span>{language === 'hi' ? 'गूगल मैप्स पर देखें (मार्ग)' : 'Open in Google Maps'}</span>
                 </a>
 
-                <div className="p-2 rounded-xl bg-white/60 border border-stone-200/80 text-[11px] font-sans opacity-80">
-                  <span className="font-semibold block mb-0.5">
-                    {language === 'hi' ? 'परिधान (ड्रेस कोड):' : 'Dress Code:'}
-                  </span>
-                  <span>{language === 'hi' ? 'पारंपरिक भारतीय / फॉर्मल इवनिंग भव्यता' : 'Formal Evening Elegance / Black Tie'}</span>
-                </div>
               </div>
             </motion.div>
           )}
 
-          {/* PAGE 6: WISHES / ANILAR GUESTBOOK */}
-          {currentPage === 6 && (
-            <motion.div
-              key="page-wishes"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col items-center justify-between h-full space-y-3 py-1 px-2"
-            >
-              <div
-                className="py-1 px-5 rounded-full border shadow-xs inline-flex items-center gap-2"
-                style={{ backgroundColor: theme.badgeBg, borderColor: theme.doorBorder }}
-              >
-                <Heart className="w-3 h-3 text-rose-600 fill-current" />
-                <h2 className="font-serif text-sm tracking-wide font-medium">
-                  {language === 'hi' ? 'शुभकामनाएं एवं आशीर्वाद' : 'Guest Wishes Wall'}
-                </h2>
-              </div>
-
-              {/* Feed of messages */}
-              <div className="w-full flex-1 overflow-y-auto space-y-2 pr-1 max-h-48 text-left">
-                {guestWishes.map((wish) => (
-                  <div
-                    key={wish.id}
-                    className="p-2.5 rounded-xl bg-white/80 border border-stone-200/80 shadow-xs space-y-1"
-                  >
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span className="font-serif font-semibold text-stone-800">
-                        {wish.author}
-                      </span>
-                      <span className="text-[9px] opacity-50">{wish.date}</span>
-                    </div>
-                    <p className="font-serif italic text-xs text-stone-700 leading-snug">
-                      "{wish.message}"
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Form to leave wish */}
-              <form onSubmit={handleWishSubmit} className="w-full space-y-1.5 pt-1 text-left">
-                {wishSent ? (
-                  <div className="py-2 text-center text-xs text-emerald-700 bg-emerald-50 rounded-xl">
-                    {language === 'hi' ? 'आपकी शुभकामना प्रेषित हो गई!' : 'Your wish was shared!'}
-                  </div>
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      required
-                      placeholder={language === 'hi' ? 'आपका नाम...' : 'Your name...'}
-                      value={wishAuthor}
-                      onChange={(e) => setWishAuthor(e.target.value)}
-                      className="w-full px-2.5 py-1 text-xs rounded-lg border bg-white/90 text-stone-800 focus:outline-none"
-                      style={{ borderColor: theme.doorBorder }}
-                    />
-                    <div className="flex gap-1.5">
-                      <input
-                        type="text"
-                        required
-                        placeholder={language === 'hi' ? 'नवदंपति के लिए मंगलकामनाएं लिखें...' : 'Write a warm wish to the couple...'}
-                        value={wishText}
-                        onChange={(e) => setWishText(e.target.value)}
-                        className="flex-1 px-2.5 py-1 text-xs rounded-lg border bg-white/90 text-stone-800 focus:outline-none"
-                        style={{ borderColor: theme.doorBorder }}
-                      />
-                      <button
-                        type="submit"
-                        className="px-3 py-1 rounded-lg text-xs font-sans font-medium bg-stone-800 text-white hover:bg-stone-900 transition-colors"
-                      >
-                        <Send className="w-3 h-3" />
-                      </button>
-                    </div>
-                  </>
-                )}
-              </form>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
 

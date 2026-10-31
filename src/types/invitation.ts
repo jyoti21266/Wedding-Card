@@ -22,6 +22,7 @@ export interface ThemeConfig {
 
 export interface TimelineItem {
   id: string;
+  dateLabel?: { en: string; hi: string };
   time: string;
   title: { en: string; hi: string };
   description?: { en: string; hi: string };
@@ -68,6 +69,7 @@ export interface InvitationData {
   venueName: string;
   venueAddress: string;
   city: string;
+  venueMapUrl?: string;
   mapCoordinates: { lat: number; lng: number };
   themeId: ThemeId;
   musicEnabled: boolean;

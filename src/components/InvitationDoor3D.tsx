@@ -1,6 +1,11 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, RefreshCw, Volume2, VolumeX } from 'lucide-react';
+import { Sparkles, Volume2, VolumeX } from 'lucide-react';
 import { InvitationData, Language } from '../types/invitation';
 import { THEMES } from '../data/defaultInvitation';
 
@@ -28,7 +33,7 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
 
   return (
     <div
-      className="relative w-full max-w-[420px] aspect-[9/16] max-h-[740px] mx-auto select-none overflow-hidden rounded-[28px] border transition-all duration-300"
+      className="relative w-full max-w-[420px] aspect-[9/16] max-h-[780px] mx-auto select-none overflow-hidden rounded-[32px] border transition-all duration-300"
       style={{
         backgroundColor: theme.cardBg,
         borderColor: theme.doorBorder,
@@ -77,7 +82,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
           >
             {/* Left Door Realistic Floral & Molded Panel Decoration */}
             <div className="relative w-full h-full p-4 flex flex-col justify-between overflow-hidden">
-              {/* Subtle Parchment Stippling Texture */}
               <div
                 className="absolute inset-0 opacity-40 mix-blend-multiply pointer-events-none"
                 style={{
@@ -86,7 +90,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                 }}
               />
 
-              {/* Inner Arch Inset Molding */}
               <div
                 className="absolute top-3 left-3 right-0 bottom-3 rounded-tl-[40px] rounded-bl-[20px] border border-white/60 pointer-events-none"
                 style={{
@@ -104,11 +107,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                   <path d="M20,20 C30,10 50,15 45,35 C40,55 20,45 20,20 Z" fill="white" opacity="0.8"/>
                   <path d="M50,25 C65,15 80,30 70,45 C60,55 45,45 50,25 Z" fill="white" opacity="0.75"/>
                   <path d="M15,45 C10,65 30,75 40,60 C48,50 30,40 15,45 Z" fill="white" opacity="0.75"/>
-                  <circle cx="18" cy="18" r="2.5" fill="#fff" filter="drop-shadow(0 1px 1px rgba(0,0,0,0.1))"/>
-                  <circle cx="28" cy="14" r="2" fill="#fff"/>
-                  <circle cx="40" cy="14" r="2.5" fill="#fff"/>
-                  <circle cx="52" cy="18" r="2" fill="#fff"/>
-                  <circle cx="62" cy="25" r="2.5" fill="#fff"/>
                 </svg>
               </div>
 
@@ -118,7 +116,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                   <path d="M40,20 Q60,40 40,60 Q20,40 40,20 Z" />
                   <path d="M40,60 Q65,80 40,100 Q15,80 40,60 Z" />
                   <circle cx="40" cy="60" r="12" fill="white" opacity="0.9"/>
-                  <circle cx="40" cy="60" r="6" fill={theme.sealColor} opacity="0.3"/>
                 </svg>
               </div>
 
@@ -127,7 +124,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                 <svg viewBox="0 0 120 120" className="w-full h-full fill-current text-white/90">
                   <path d="M10,110 Q40,115 50,90 Q60,115 90,110 Q85,80 60,75 Q90,65 90,35 Q65,45 50,25 Q40,55 10,50 Q25,75 10,110 Z" opacity="0.6"/>
                   <circle cx="35" cy="85" r="14" fill="white" opacity="0.7"/>
-                  <path d="M20,100 C30,110 50,105 45,85 C40,65 20,75 20,100 Z" fill="white" opacity="0.8"/>
                 </svg>
               </div>
             </div>
@@ -163,7 +159,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                 }}
               />
 
-              {/* Inner Arch Inset Molding */}
               <div
                 className="absolute top-3 left-0 right-3 bottom-3 rounded-tr-[40px] rounded-br-[20px] border border-white/60 pointer-events-none"
                 style={{
@@ -178,9 +173,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                   <path d="M10,10 Q40,5 50,30 Q60,5 90,10 Q85,40 60,45 Q90,55 90,85 Q65,75 50,95 Q40,65 10,70 Q25,45 10,10 Z" opacity="0.6"/>
                   <circle cx="35" cy="35" r="14" fill="white" opacity="0.7"/>
                   <circle cx="35" cy="35" r="7" fill="none" stroke={theme.accent} strokeWidth="1.5" opacity="0.4"/>
-                  <path d="M20,20 C30,10 50,15 45,35 C40,55 20,45 20,20 Z" fill="white" opacity="0.8"/>
-                  <path d="M50,25 C65,15 80,30 70,45 C60,55 45,45 50,25 Z" fill="white" opacity="0.75"/>
-                  <path d="M15,45 C10,65 30,75 40,60 C48,50 30,40 15,45 Z" fill="white" opacity="0.75"/>
                 </svg>
               </div>
 
@@ -188,7 +180,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
               <div className="relative z-10 w-20 h-28 ml-auto my-auto opacity-70 filter drop-shadow-[0_2px_4px_rgba(140,110,100,0.15)]">
                 <svg viewBox="0 0 80 120" className="w-full h-full fill-white/80 transform scale-x-[-1]">
                   <path d="M40,20 Q60,40 40,60 Q20,40 40,20 Z" />
-                  <path d="M40,60 Q65,80 40,100 Q15,80 40,60 Z" />
                   <circle cx="40" cy="60" r="12" fill="white" opacity="0.9"/>
                 </svg>
               </div>
@@ -204,7 +195,7 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
           </motion.div>
         </div>
 
-        {/* CENTER WAX SEAL CONTAINER (Centered via Flexbox, above doors) */}
+        {/* CENTER WAX SEAL CONTAINER */}
         <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
           <AnimatePresence>
             {!isOpen && (
@@ -247,19 +238,17 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                     `
                   }}
                 >
-                  {/* Subtle Inner Wax Ring */}
                   <div
                     className="absolute inset-2 rounded-[50%] border pointer-events-none"
                     style={{ borderColor: theme.sealAccent, opacity: 0.4 }}
                   />
 
-                  {/* Botanical Sprig / Olive Branch Motif */}
+                  {/* Botanical Sprig Motif */}
                   <svg
                     viewBox="0 0 60 90"
                     className="w-12 h-18 fill-current filter drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]"
                     style={{ color: theme.sealAccent }}
                   >
-                    {/* Stem */}
                     <path
                       d="M30,80 Q29,45 31,12"
                       fill="none"
@@ -267,16 +256,12 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                       strokeWidth="2"
                       strokeLinecap="round"
                     />
-                    {/* Leaves pair 1 */}
                     <path d="M30,70 Q16,65 20,55 Q27,58 30,70 Z" />
                     <path d="M30,68 Q44,63 40,53 Q33,56 30,68 Z" />
-                    {/* Leaves pair 2 */}
                     <path d="M30,52 Q14,47 18,37 Q26,40 30,52 Z" />
                     <path d="M30,50 Q46,45 42,35 Q34,38 30,50 Z" />
-                    {/* Leaves pair 3 */}
                     <path d="M30,34 Q18,28 22,20 Q28,24 30,34 Z" />
                     <path d="M30,32 Q42,26 38,18 Q32,22 30,32 Z" />
-                    {/* Top leaf */}
                     <path d="M30,16 Q28,6 31,2 Q34,6 30,16 Z" />
                   </svg>
 
@@ -290,7 +275,7 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
                     }}
                   >
                     <Sparkles className="w-3 h-3 text-amber-600 animate-spin" />
-                    <span>{language === 'hi' ? 'मुहर खोलें' : 'Open Seal'}</span>
+                    <span>{language === 'hi' ? 'मुहर खोलें' : 'Tap to Open'}</span>
                   </div>
                 </div>
               </motion.button>
@@ -298,7 +283,7 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
           </AnimatePresence>
         </div>
 
-        {/* FLOATING ACTION OVERLAYS INSIDE SIMULATOR */}
+        {/* FLOATING ACTION OVERLAYS */}
         {isOpen && (
           <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
             <button
@@ -310,20 +295,6 @@ export const InvitationDoor3D: React.FC<InvitationDoor3DProps> = ({
             >
               {isMuted ? <VolumeX className="w-4 h-4 text-stone-400" /> : <Volume2 className="w-4 h-4 text-rose-700 animate-pulse" />}
             </button>
-          </div>
-        )}
-
-        {/* Closed Door Tagline Header */}
-        {!isOpen && (
-          <div className="absolute top-6 left-0 right-0 z-30 px-6 text-center pointer-events-none">
-            <motion.p
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="font-serif italic text-lg sm:text-xl tracking-wide drop-shadow-sm"
-              style={{ color: theme.primary }}
-            >
-              {invitation.tagline[language]}
-            </motion.p>
           </div>
         )}
       </div>

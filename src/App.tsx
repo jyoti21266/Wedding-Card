@@ -68,6 +68,12 @@ export default function App() {
     }
   };
 
+  const handleUserInteraction = () => {
+    if (audioRef.current && audioRef.current.paused && !isMuted) {
+      audioRef.current.play().catch(() => {});
+    }
+  };
+
   const handleRsvpSubmit = (entry: Omit<RsvpEntry, 'id' | 'submittedAt'>) => {
     const newEntry: RsvpEntry = {
       ...entry,
@@ -93,7 +99,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-100 flex flex-col font-sans text-stone-900">
+    <div className="min-h-screen bg-stone-100 flex flex-col font-sans text-stone-900" onClick={handleUserInteraction}>
       {/* Refined Minimalist Top Control Bar (Language, Sound, Share) */}
       <header className="w-full py-4 px-6 flex items-center justify-between max-w-2xl mx-auto">
         {/* Couple Monogram / Date indicator */}
